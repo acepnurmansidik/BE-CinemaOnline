@@ -33,4 +33,15 @@ module.exports = {
       console.log(err.message);
     }
   },
+  actioanDeleteCategory: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const data = await category.destroy({ where: { id } });
+
+      res.status(201).json({ data: { data } });
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
 };
