@@ -18,4 +18,13 @@ module.exports = {
       console.log(err.message);
     }
   },
+  actionCreateFilm: async (req, res) => {
+    try {
+      const payload = req.body;
+      const dataFilm = await film.create({ ...payload });
+      res.status(201).json({ data: { film: dataFilm } });
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
 };
