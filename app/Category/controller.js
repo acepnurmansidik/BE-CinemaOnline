@@ -21,4 +21,16 @@ module.exports = {
       console.log(err.message);
     }
   },
+  actioanUpdateCategory: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const payload = req.body;
+
+      const data = await category.update({ ...payload }, { where: { id } });
+
+      res.status(201).json({ data: { data } });
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
 };
