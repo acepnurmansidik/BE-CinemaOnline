@@ -1,4 +1,6 @@
 const express = require("express");
+const router = express.Router();
+const { isLoginAuthorization } = require("../middleware");
 const {
   viewFilm,
   actionCreateFilm,
@@ -6,10 +8,11 @@ const {
   actionDeleteFilm,
   viewDetailFilm,
 } = require("./controller");
-const router = express.Router();
 
 router.get("/film", viewFilm);
 router.get("/film/:id", viewDetailFilm);
+
+router.use(isLoginAuthorization);
 router.post("/film", actionCreateFilm);
 router.patch("/film/:id", actionUpdateFilm);
 router.delete("/film/:id", actionDeleteFilm);
