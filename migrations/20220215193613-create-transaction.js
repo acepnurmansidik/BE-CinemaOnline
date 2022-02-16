@@ -17,6 +17,11 @@ module.exports = {
       transferProof: {
         type: Sequelize.STRING,
       },
+      orderDate: {
+        allowNull: false,
+        defaultValue: Sequelize.fn("now"),
+        type: Sequelize.DATE,
+      },
       userId: {
         type: Sequelize.INTEGER,
         references: {

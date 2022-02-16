@@ -3,7 +3,11 @@ const { category } = require("../../models");
 module.exports = {
   viewCategory: async (req, res) => {
     try {
-      const categories = await category.findAll();
+      const categories = await category.findAll({
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      });
 
       res.status(200).json({ data: { categories } });
     } catch (err) {

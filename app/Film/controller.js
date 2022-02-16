@@ -4,11 +4,14 @@ module.exports = {
   viewFilm: async (req, res) => {
     try {
       const films = await film.findAll({
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
         include: {
           model: category,
           as: "category",
           attributes: {
-            exclude: ["createdAt", "updatedAt"],
+            exclude: ["createdAt", "updatedAt", "categoryId"],
           },
         },
       });
@@ -34,7 +37,12 @@ module.exports = {
         req.body;
       const dataFilm = await film.update(
         { title, price, filmUrl, description, thumbnail, categoryId },
-        { where: { id } }
+        {
+          where: { id },
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        }
       );
       res.status(201).json({ data: { film: dataFilm } });
     } catch (err) {
@@ -46,6 +54,28 @@ module.exports = {
       const { id } = req.params;
       const dataFilm = await film.destroy({ where: { id } });
       res.status(201).json({ data: { film: dataFilm } });
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
+  viewDetailFilm: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const films = await film.findOne({
+        where: { id },
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "categoryId"],
+        },
+        include: {
+          model: category,
+          as: "category",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      });
+
+      res.status(200).json({ data: { book: films } });
     } catch (err) {
       console.log(err.message);
     }
