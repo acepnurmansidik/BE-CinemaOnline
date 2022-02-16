@@ -46,4 +46,49 @@ module.exports = {
       console.log(err.message);
     }
   },
+  actionLogin: async (req, res) => {
+    try {
+      const { email, password } = req.body;
+
+      const userExist = await user.findOne({
+        where: {
+          email,
+        },
+      });
+
+      if (!userExist) {
+        return res
+          .status(400)
+          .json({ status: "failed", message: "Email not register!" });
+      }
+      const isMatchPass = await bcrypt.compare(password, userExist.password);
+      if (!isMatchPass) {
+        return res
+          .status(400)
+          .json({ status: "failed", message: "Password your entered wrong!" });
+      }
+
+      const token = jwt.sign(
+        {
+          id: userExist.id,
+          email: userExist.email,
+          fullname: userExist.fullname,
+        },
+        config.jwtKey
+      );
+
+      res.status(200).json({
+        status: "success",
+        data: {
+          user: {
+            email: userExist.email,
+            fullname: userExist.fullname,
+            token,
+          },
+        },
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
 };
