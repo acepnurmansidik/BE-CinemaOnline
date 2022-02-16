@@ -10,6 +10,7 @@ module.exports = {
       },
       status: {
         type: Sequelize.ENUM("approved", "pending", "cancel"),
+        defaultValue: "pending",
       },
       accountNumber: {
         type: Sequelize.INTEGER,
