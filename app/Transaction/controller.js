@@ -42,4 +42,29 @@ module.exports = {
       console.log(err);
     }
   },
+  actioanUpdateTransaction: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status = "" } = req.query;
+
+      if (status.length) {
+        const data = await transaction.update(
+          { status },
+          {
+            where: {
+              id,
+            },
+          }
+        );
+
+        res.status(201).json({
+          status: "success",
+          message: "Successfuly change status payment",
+          data: { data },
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
