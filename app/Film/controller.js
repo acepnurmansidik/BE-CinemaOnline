@@ -22,7 +22,7 @@ module.exports = {
         data: { films },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
   actionCreateFilm: async (req, res) => {
@@ -35,7 +35,7 @@ module.exports = {
         data: { film: dataFilm },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
   actionUpdateFilm: async (req, res) => {
@@ -58,7 +58,7 @@ module.exports = {
         data: { film: dataFilm },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
   actionDeleteFilm: async (req, res) => {
@@ -71,7 +71,7 @@ module.exports = {
         data: { film: dataFilm },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
   viewDetailFilm: async (req, res) => {
@@ -97,7 +97,7 @@ module.exports = {
         data: { book: films },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
 };

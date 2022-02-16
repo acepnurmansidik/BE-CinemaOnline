@@ -43,7 +43,7 @@ module.exports = {
         },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
   actionLogin: async (req, res) => {
@@ -58,13 +58,13 @@ module.exports = {
 
       if (!userExist) {
         return res
-          .status(400)
+          .status(404)
           .json({ status: "failed", message: "Email not register!" });
       }
       const isMatchPass = await bcrypt.compare(password, userExist.password);
       if (!isMatchPass) {
         return res
-          .status(400)
+          .status(403)
           .json({ status: "failed", message: "Password your entered wrong!" });
       }
 
@@ -89,7 +89,7 @@ module.exports = {
         },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
 };

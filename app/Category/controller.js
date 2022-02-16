@@ -15,7 +15,7 @@ module.exports = {
         data: { categories },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
   actioanCreateCategory: async (req, res) => {
@@ -30,7 +30,7 @@ module.exports = {
         data: { data },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
   actioanUpdateCategory: async (req, res) => {
@@ -46,7 +46,7 @@ module.exports = {
         data: { data },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
   actioanDeleteCategory: async (req, res) => {
@@ -61,7 +61,7 @@ module.exports = {
         data: { data },
       });
     } catch (err) {
-      console.log(err.message);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
 };
