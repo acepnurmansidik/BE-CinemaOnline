@@ -41,4 +41,13 @@ module.exports = {
       console.log(err.message);
     }
   },
+  actionDeleteFilm: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const dataFilm = await film.destroy({ where: { id } });
+      res.status(201).json({ data: { film: dataFilm } });
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
 };
