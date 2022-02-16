@@ -16,7 +16,11 @@ module.exports = {
         },
       });
 
-      res.status(200).json({ data: { films } });
+      res.status(200).json({
+        status: "success",
+        message: "Successfully data obtained",
+        data: { films },
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -25,7 +29,11 @@ module.exports = {
     try {
       const payload = req.body;
       const dataFilm = await film.create({ ...payload });
-      res.status(201).json({ data: { film: dataFilm } });
+      res.status(201).json({
+        status: "success",
+        message: "Successfully created film",
+        data: { film: dataFilm },
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -44,7 +52,11 @@ module.exports = {
           },
         }
       );
-      res.status(201).json({ data: { film: dataFilm } });
+      res.status(201).json({
+        status: "success",
+        message: "Successfully update film",
+        data: { film: dataFilm },
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -53,7 +65,11 @@ module.exports = {
     try {
       const { id } = req.params;
       const dataFilm = await film.destroy({ where: { id } });
-      res.status(201).json({ data: { film: dataFilm } });
+      res.status(201).json({
+        status: "success",
+        message: "Successfully detele film",
+        data: { film: dataFilm },
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -75,7 +91,11 @@ module.exports = {
         },
       });
 
-      res.status(200).json({ data: { book: films } });
+      res.status(200).json({
+        status: "success",
+        message: "Successfully data obtained",
+        data: { book: films },
+      });
     } catch (err) {
       console.log(err.message);
     }

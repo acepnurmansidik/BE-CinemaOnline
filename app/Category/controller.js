@@ -9,7 +9,11 @@ module.exports = {
         },
       });
 
-      res.status(200).json({ data: { categories } });
+      res.status(200).json({
+        status: "success",
+        message: "Successfully created account",
+        data: { categories },
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -20,7 +24,11 @@ module.exports = {
 
       const data = await category.create({ ...payload });
 
-      res.status(201).json({ data: { data } });
+      res.status(201).json({
+        status: "success",
+        message: "Successfully create category",
+        data: { data },
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -32,7 +40,11 @@ module.exports = {
 
       const data = await category.update({ ...payload }, { where: { id } });
 
-      res.status(201).json({ data: { data } });
+      res.status(201).json({
+        status: "success",
+        message: "Successfully update category",
+        data: { data },
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -43,7 +55,11 @@ module.exports = {
 
       const data = await category.destroy({ where: { id } });
 
-      res.status(201).json({ data: { data } });
+      res.status(201).json({
+        status: "success",
+        message: "Successfully delete category",
+        data: { data },
+      });
     } catch (err) {
       console.log(err.message);
     }

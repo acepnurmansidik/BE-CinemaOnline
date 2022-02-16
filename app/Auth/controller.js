@@ -79,6 +79,7 @@ module.exports = {
 
       res.status(200).json({
         status: "success",
+        message: "Successfully data obtained",
         data: {
           user: {
             email: userExist.email,

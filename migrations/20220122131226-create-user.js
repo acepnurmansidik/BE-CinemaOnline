@@ -20,6 +20,10 @@ module.exports = {
       avatar: {
         type: Sequelize.STRING,
       },
+      status: {
+        type: Sequelize.ENUM("admin", "costumer"),
+        defaultValue: "costumer",
+      },
       phone: {
         type: Sequelize.INTEGER,
       },
