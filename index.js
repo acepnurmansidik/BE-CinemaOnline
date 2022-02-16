@@ -4,6 +4,7 @@ const cors = require("cors");
 // Get routes to the variabel
 const categoryRouter = require("./app/Category/router");
 const filmRouter = require("./app/Film/router");
+const authRouter = require("./app/Auth/router");
 
 //use express in app variable
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(cors());
 
 // Add endpoint grouping and router
+app.use(`${API}`, authRouter);
 app.use(`${API}`, categoryRouter);
 app.use(`${API}`, filmRouter);
 
