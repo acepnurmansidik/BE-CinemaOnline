@@ -19,6 +19,7 @@ module.exports = {
         id: data.id,
         email: data.email,
         fullname: data.fullname,
+        status: data.status,
       };
 
       //   send data & token

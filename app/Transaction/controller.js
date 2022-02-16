@@ -67,4 +67,29 @@ module.exports = {
       console.log(err);
     }
   },
+  viewAllTransaction: async (req, res) => {
+    try {
+      if (req.userLogin.status == "admin") {
+        const data = await transaction.findAll();
+
+        res.status(200).json({
+          status: "success",
+          message: "Successfuly data obtained",
+          data: { data },
+        });
+      } else {
+        const data = await transaction.findAll({
+          where: { userId: req.userLogin.id },
+        });
+
+        res.status(200).json({
+          status: "success",
+          message: "Successfuly data obtained",
+          data: { data },
+        });
+      }
+    } catch (err) {
+      res.status(500).json({ status: "failed", message: "Server error" });
+    }
+  },
 };
