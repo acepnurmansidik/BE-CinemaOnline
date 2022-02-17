@@ -28,7 +28,9 @@ module.exports = {
 
       next();
     } catch (err) {
-      res.status(500).json({ status: "failed", message: "Server error" });
+      res
+        .status(401)
+        .json({ status: "Unauthorized", message: "Access authorized!" });
     }
   },
 };

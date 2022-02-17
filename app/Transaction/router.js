@@ -8,8 +8,8 @@ const {
 const router = express.Router();
 
 router.use(isLoginAuthorization);
-router.get("/transaction", viewAllTransaction);
-router.post("/transaction", actioanCreateTransaction);
-router.patch("/transaction/:id", actioanUpdateTransaction);
+router.get("/transactions", viewAllTransaction);
+router.post("/transactions", actioanCreateTransaction);
+router.patch("/transactions/:id", actioanUpdateTransaction);
 
 module.exports = router;

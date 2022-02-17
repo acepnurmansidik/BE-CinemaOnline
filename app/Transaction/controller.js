@@ -3,41 +3,44 @@ const { transaction, film } = require("../../models");
 module.exports = {
   actioanCreateTransaction: async (req, res) => {
     try {
-      const { transferProof, accountNumber, filmId } = req.body;
+      // const { transferProof, accountNumber, filmId } = req.body;
 
-      if (!accountNumber) {
-        return res.status(500).json({
-          status: "failed",
-          message: "Account number cannot be empty!",
-        });
-      }
-      if (!filmId) {
-        return res.status(500).json({
-          status: "failed",
-          message: "Please choose your movie!",
-        });
-      }
+      // if (!accountNumber) {
+      //   return res.status(500).json({
+      //     status: "failed",
+      //     message: "Account number cannot be empty!",
+      //   });
+      // }
+      // if (!filmId) {
+      //   return res.status(500).json({
+      //     status: "failed",
+      //     message: "Please choose your movie!",
+      //   });
+      // }
       // check if movei not registered
-      let filmExist = await film.findOne({ where: { id: filmId } });
-      if (!filmExist) {
-        return res.status(404).json({
-          status: "failed",
-          message: "Movie not found, choose your movie!",
-        });
-      }
+      // let filmExist = await film.findOne({ where: { id: filmId } });
+      // if (!filmExist) {
+      //   return res.status(404).json({
+      //     status: "failed",
+      //     message: "Movie not found, choose your movie!",
+      //   });
+      // }
 
-      const data = await transaction.create({
-        transferProof,
-        accountNumber,
-        filmId,
-      });
+      // const data = await transaction.create({
+      //   transferProof,
+      //   accountNumber,
+      //   filmId,
+      //   userId: req.userLogin.id,
+      // });
 
-      res.status(201).json({
-        status: "success",
-        message:
-          "Transaction success, please wait 1x 24 hours for confirm your payment",
-        data: { data },
-      });
+      // res.status(201).json({
+      //   status: "success",
+      //   message:
+      //     "Transaction success, please wait 1x 24 hours for confirm your payment",
+      //   data: { data },
+      // });
+      const payload = req.body;
+      console.log(payload);
     } catch (err) {
       console.log(err);
     }
