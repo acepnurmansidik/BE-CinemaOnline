@@ -41,6 +41,7 @@ module.exports = {
           email: userCreate.email,
           fullname: userCreate.fullname,
           status: userCreate.status,
+          avatar: userCreate.avatar,
         },
         config.jwtKey
       );
@@ -73,6 +74,7 @@ module.exports = {
               email: userExist.email,
               fullname: userExist.fullname,
               status: userExist.status,
+              avatar: userExist.avatar,
             },
             config.jwtKey
           );
