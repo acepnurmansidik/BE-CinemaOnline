@@ -25,9 +25,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   transaction.init(
     {
-      status: DataTypes.ENUM("approved", "pending", "cancel"),
+      status: DataTypes.STRING,
       accountNumber: DataTypes.INTEGER,
       transferProof: DataTypes.STRING,
+      orderDate: DataTypes.DATE,
       userId: DataTypes.INTEGER,
       filmId: DataTypes.INTEGER,
     },

@@ -9,16 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(10),
       },
       createdAt: {
         allowNull: false,
-        defaultValue: Sequelize.fn("now"),
         type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        defaultValue: Sequelize.fn("now"),
         type: Sequelize.DATE,
       },
     });

@@ -9,23 +9,23 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       email: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(100),
       },
       password: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(70),
       },
       fullname: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(100),
       },
       avatar: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
       },
       status: {
-        type: Sequelize.ENUM("admin", "costumer"),
+        type: Sequelize.STRING(10),
         defaultValue: "costumer",
       },
       phone: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(15),
       },
       createdAt: {
         allowNull: false,

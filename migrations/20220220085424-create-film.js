@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       title: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(100),
       },
       price: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(10),
       },
       filmUrl: {
         type: Sequelize.STRING,
@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       thumbnail: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
       },
       categoryId: {
         type: Sequelize.INTEGER,
@@ -34,12 +34,10 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        defaultValue: Sequelize.fn("now"),
         type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        defaultValue: Sequelize.fn("now"),
         type: Sequelize.DATE,
       },
     });
