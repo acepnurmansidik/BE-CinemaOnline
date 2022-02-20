@@ -1,4 +1,4 @@
-const { category, film } = require("../../models");
+const { category, film, sequelize } = require("../../models");
 const { uploadPath } = require("../../config");
 
 module.exports = {
@@ -15,6 +15,36 @@ module.exports = {
             exclude: ["createdAt", "updatedAt", "categoryId"],
           },
         },
+        order: sequelize.random(),
+      });
+
+      films.map((item) => {
+        item.thumbnail = uploadPath + item.thumbnail;
+      });
+
+      res.status(200).json({
+        status: "success",
+        message: "Successfully data obtained",
+        data: { films },
+      });
+    } catch (err) {
+      res.status(500).json({ status: "failed", message: "Server error" });
+    }
+  },
+  viewFilmPromo: async (req, res) => {
+    try {
+      const films = await film.findAll({
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        include: {
+          model: category,
+          as: "category",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "categoryId"],
+          },
+        },
+        limit: 3,
       });
 
       films.map((item) => {

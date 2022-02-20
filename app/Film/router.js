@@ -8,9 +8,11 @@ const {
   actionUpdateFilm,
   actionDeleteFilm,
   viewDetailFilm,
+  viewFilmPromo,
 } = require("./controller");
 
 router.get("/film", viewFilm);
+router.get("/film-promo", viewFilmPromo);
 router.get("/film/:id", viewDetailFilm);
 
 router.use(isLoginAuthorization);
