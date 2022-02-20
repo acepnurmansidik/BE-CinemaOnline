@@ -72,41 +72,59 @@ module.exports = {
   },
   viewAllTransaction: async (req, res) => {
     try {
+      const { status = "" } = req.query;
+      let data;
       if (req.userLogin.status == "admin") {
-        const data = await transaction.findAll({
-          attributes: {
-            exclude: ["createdAt", "updatedAt"],
-          },
-          include: [
-            {
-              model: film,
-              as: "films",
-              attributes: ["id", "title", "thumbnail", "price"],
+        if (status.length) {
+          data = await transaction.findAll({
+            where: {
+              status,
             },
-            {
-              model: user,
-              as: "users",
-              attributes: ["id", "email", "fullname", "phone"],
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
             },
-          ],
-        });
-
-        res.status(200).json({
-          status: "success",
-          message: "Successfuly data obtained",
-          data: { data },
-        });
+            include: [
+              {
+                model: film,
+                as: "films",
+                attributes: ["id", "title", "thumbnail", "price"],
+              },
+              {
+                model: user,
+                as: "users",
+                attributes: ["id", "email", "fullname", "phone"],
+              },
+            ],
+          });
+        } else {
+          data = await transaction.findAll({
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+            include: [
+              {
+                model: film,
+                as: "films",
+                attributes: ["id", "title", "thumbnail", "price"],
+              },
+              {
+                model: user,
+                as: "users",
+                attributes: ["id", "email", "fullname", "phone"],
+              },
+            ],
+          });
+        }
       } else {
-        const data = await transaction.findAll({
+        data = await transaction.findAll({
           where: { userId: req.userLogin.id },
         });
-
-        res.status(200).json({
-          status: "success",
-          message: "Successfuly data obtained",
-          data: { data },
-        });
       }
+      res.status(200).json({
+        status: "success",
+        message: "Successfuly data obtained",
+        data: { data },
+      });
     } catch (err) {
       res.status(500).json({ status: "failed", message: "Server error" });
     }
