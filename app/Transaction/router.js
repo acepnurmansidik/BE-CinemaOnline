@@ -6,10 +6,12 @@ const {
   actioanCreateTransaction,
   actioanUpdateTransaction,
   viewAllTransaction,
+  viewDetailTransaction,
 } = require("./controller");
 
 router.use(isLoginAuthorization);
 router.get("/transactions", viewAllTransaction);
+router.get("/transactions/:id", viewDetailTransaction);
 router.post(
   "/transactions",
   uploadFile("transferProof"),

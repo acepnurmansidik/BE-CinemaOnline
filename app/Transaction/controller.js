@@ -136,4 +136,37 @@ module.exports = {
       res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
+  viewDetailTransaction: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = await transaction.findOne({
+        where: {
+          filmId: id,
+          userId: req.userLogin.id,
+        },
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        include: [
+          {
+            model: film,
+            as: "films",
+            attributes: ["id", "title", "thumbnail", "price"],
+          },
+          {
+            model: user,
+            as: "users",
+            attributes: ["id", "email", "fullname", "phone"],
+          },
+        ],
+      });
+      res.status(200).json({
+        status: "success",
+        message: "Successfuly data obtained",
+        data: { data },
+      });
+    } catch (err) {
+      res.status(500).json({ status: "failed", message: "Server error" });
+    }
+  },
 };
