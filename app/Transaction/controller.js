@@ -50,24 +50,26 @@ module.exports = {
       const { id } = req.params;
       const { status = "" } = req.query;
 
-      if (status.length) {
-        const data = await transaction.update(
-          { status },
-          {
-            where: {
-              id,
-            },
-          }
-        );
+      if (!req.file) {
+        if (status.length) {
+          const data = await transaction.update(
+            { status },
+            {
+              where: {
+                id,
+              },
+            }
+          );
 
-        res.status(201).json({
-          status: "success",
-          message: "Successfuly change status payment",
-          data: { data },
-        });
+          res.status(201).json({
+            status: "success",
+            message: "Successfuly change status payment",
+            data: { data },
+          });
+        }
       }
     } catch (err) {
-      console.log(err);
+      res.status(500).json({ status: "failed", message: "Server error" });
     }
   },
   viewAllTransaction: async (req, res) => {

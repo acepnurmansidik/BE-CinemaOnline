@@ -15,6 +15,10 @@ router.post(
   uploadFile("transferProof"),
   actioanCreateTransaction
 );
-router.patch("/transactions/:id", actioanUpdateTransaction);
+router.patch(
+  "/transactions/:id",
+  uploadFile("transferProof"),
+  actioanUpdateTransaction
+);
 
 module.exports = router;
