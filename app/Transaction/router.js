@@ -1,15 +1,20 @@
 const express = require("express");
-const { isLoginAuthorization } = require("../middleware");
+const router = express.Router();
+const { uploadFile } = require("../middleware/uploadFile");
+const { isLoginAuthorization } = require("../middleware/index");
 const {
   actioanCreateTransaction,
   actioanUpdateTransaction,
   viewAllTransaction,
 } = require("./controller");
-const router = express.Router();
 
 router.use(isLoginAuthorization);
 router.get("/transactions", viewAllTransaction);
-router.post("/transactions", actioanCreateTransaction);
+router.post(
+  "/transactions",
+  uploadFile("transferProof"),
+  actioanCreateTransaction
+);
 router.patch("/transactions/:id", actioanUpdateTransaction);
 
 module.exports = router;
