@@ -1,4 +1,5 @@
 const { category, film } = require("../../models");
+const { uploadPath } = require("../../config");
 
 module.exports = {
   viewFilm: async (req, res) => {
@@ -16,6 +17,10 @@ module.exports = {
         },
       });
 
+      films.map((item) => {
+        item.thumbnail = uploadPath + item.thumbnail;
+      });
+
       res.status(200).json({
         status: "success",
         message: "Successfully data obtained",
@@ -28,7 +33,10 @@ module.exports = {
   actionCreateFilm: async (req, res) => {
     try {
       const payload = req.body;
-      const dataFilm = await film.create({ ...payload });
+      const dataFilm = await film.create({
+        ...payload,
+        thumbnail: req.file.filename,
+      });
       res.status(201).json({
         status: "success",
         message: "Successfully created film",
@@ -41,17 +49,30 @@ module.exports = {
   actionUpdateFilm: async (req, res) => {
     try {
       const { id } = req.params;
-      const { title, price, filmUrl, description, thumbnail, categoryId } =
-        req.body;
-      const dataFilm = await film.update(
-        { title, price, filmUrl, description, thumbnail, categoryId },
-        {
-          where: { id },
-          attributes: {
-            exclude: ["createdAt", "updatedAt"],
-          },
-        }
-      );
+      const payload = req.body;
+      let dataFilm;
+
+      if (req.file) {
+        dataFilm = await film.update(
+          { ...payload, thumbnail: req.file.filename },
+          {
+            where: { id },
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          }
+        );
+      } else {
+        dataFilm = await film.update(
+          { ...payload },
+          {
+            where: { id },
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          }
+        );
+      }
       res.status(201).json({
         status: "success",
         message: "Successfully update film",
@@ -90,6 +111,8 @@ module.exports = {
           },
         },
       });
+
+      films.thumbnail = uploadPath + films.thumbnail;
 
       res.status(200).json({
         status: "success",

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { isLoginAuthorization } = require("../middleware");
+const { uploadFile } = require("../middleware/uploadFile");
+const { isLoginAuthorization } = require("../middleware/index");
 const {
   viewFilm,
   actionCreateFilm,
@@ -13,8 +14,8 @@ router.get("/film", viewFilm);
 router.get("/film/:id", viewDetailFilm);
 
 router.use(isLoginAuthorization);
-router.post("/film", actionCreateFilm);
-router.patch("/film/:id", actionUpdateFilm);
+router.post("/film", uploadFile("thumbnail"), actionCreateFilm);
+router.patch("/film/:id", uploadFile("thumbnail"), actionUpdateFilm);
 router.delete("/film/:id", actionDeleteFilm);
 
 module.exports = router;
