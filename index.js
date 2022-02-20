@@ -6,6 +6,7 @@ const authRouter = require("./app/Auth/router");
 const filmRouter = require("./app/Film/router");
 const categoryRouter = require("./app/Category/router");
 const transactionRouter = require("./app/Transaction/router");
+const userRouter = require("./app/User/router");
 
 //use express in app variable
 const app = express();
@@ -23,6 +24,7 @@ app.use(`${API}`, authRouter);
 app.use(`${API}`, filmRouter);
 app.use(`${API}`, categoryRouter);
 app.use(`${API}`, transactionRouter);
+app.use(`${API}`, userRouter);
 
 // add route here to serving static file
 app.use("/uploads", express.static("uploads"));
