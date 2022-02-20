@@ -1,6 +1,6 @@
 const express = require("express");
-const { isLoginAuthorization } = require("../middleware");
 const router = express.Router();
+const { isLoginAuthorization } = require("../middleware/index");
 const {
   viewCategory,
   actioanCreateCategory,
