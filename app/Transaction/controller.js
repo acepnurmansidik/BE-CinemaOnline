@@ -3,8 +3,13 @@ const { transaction, film, user } = require("../../models");
 module.exports = {
   actioanCreateTransaction: async (req, res) => {
     try {
-      const { transferProof, accountNumber, filmId } = req.body;
-
+      const { accountNumber, filmId } = req.body;
+      if (req.userLogin.status === "admin") {
+        return res.status(403).json({
+          status: "success",
+          message: "Costumer only!",
+        });
+      }
       if (!accountNumber) {
         return res.status(500).json({
           status: "failed",
@@ -27,7 +32,7 @@ module.exports = {
       }
 
       const data = await transaction.create({
-        transferProof,
+        transferProof: req.file.filename,
         accountNumber,
         filmId,
         userId: req.userLogin.id,
