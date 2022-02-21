@@ -73,11 +73,10 @@ module.exports = {
           as: "films",
           attributes: ["id", "title", "thumbnail"],
         },
-        limit: 3,
       });
 
       films.map((item) => {
-        item.thumbnail = uploadPath + item.thumbnail;
+        item.films.thumbnail = uploadPath + item.films.thumbnail;
       });
 
       res.status(200).json({
