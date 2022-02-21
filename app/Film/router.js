@@ -9,6 +9,7 @@ const {
   actionDeleteFilm,
   viewDetailFilm,
   viewFilmPromo,
+  viewMyListFilm,
 } = require("./controller");
 
 router.get("/film", viewFilm);
@@ -19,5 +20,6 @@ router.use(isLoginAuthorization);
 router.post("/film", uploadFile("thumbnail"), actionCreateFilm);
 router.patch("/film/:id", uploadFile("thumbnail"), actionUpdateFilm);
 router.delete("/film/:id", actionDeleteFilm);
+router.get("/my-film", viewMyListFilm);
 
 module.exports = router;
