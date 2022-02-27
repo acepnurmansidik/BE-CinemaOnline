@@ -1,5 +1,6 @@
 const { category, film, sequelize, transaction } = require("../../models");
 const { uploadPath } = require("../../config");
+const { Op } = require("sequelize");
 
 module.exports = {
   viewFilm: async (req, res) => {
@@ -176,6 +177,33 @@ module.exports = {
         status: "success",
         message: "Successfully data obtained",
         data: { book: films },
+      });
+    } catch (err) {
+      res.status(500).json({ status: "failed", message: "Server error" });
+    }
+  },
+  searchFilms: async (req, res) => {
+    try {
+      const { sc = "" } = req.query;
+      let data;
+      if (sc) {
+        data = await film.findAll({
+          where: {
+            title: {
+              [Op.like]: `%${sc}%`,
+            },
+          },
+        });
+      }
+
+      data.map((item) => {
+        item.thumbnail = uploadPath + item.thumbnail;
+      });
+
+      res.status(200).json({
+        status: "success",
+        message: "data has been obtained",
+        data: { films: data },
       });
     } catch (err) {
       res.status(500).json({ status: "failed", message: "Server error" });

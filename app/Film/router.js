@@ -10,11 +10,13 @@ const {
   viewDetailFilm,
   viewFilmPromo,
   viewMyListFilm,
+  searchFilms,
 } = require("./controller");
 
 router.get("/film", viewFilm);
 router.get("/film-promo", viewFilmPromo);
 router.get("/film/:id", viewDetailFilm);
+router.get("/search-film", searchFilms);
 
 router.use(isLoginAuthorization);
 router.post("/film", uploadFile("thumbnail"), actionCreateFilm);
