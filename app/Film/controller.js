@@ -16,7 +16,7 @@ module.exports = {
             exclude: ["createdAt", "updatedAt", "categoryId"],
           },
         },
-        order: sequelize.random(),
+        limit: 10,
       });
 
       films.map((item) => {
@@ -194,6 +194,8 @@ module.exports = {
             },
           },
         });
+      } else {
+        data = await film.findAll();
       }
 
       data.map((item) => {
