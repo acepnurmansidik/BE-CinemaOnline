@@ -14,7 +14,7 @@ const app = express();
 const API = `/api/v1`;
 
 //define the server port
-const port = 5000;
+const port = proccess.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
